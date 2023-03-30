@@ -26,7 +26,7 @@ if 'start_point' not in st.session_state:
 def update_start(start_t):
     st.session_state['start_point'] = int(start_t / 1000)
 
-uploaded_file = st.file_uploader("choose file", type="mp4")
+uploaded_file = st.file_uploader("choose file", type=["webm" , "mp4"])
 if uploaded_file is not None:
 
 
