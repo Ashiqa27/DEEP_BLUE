@@ -83,8 +83,8 @@ if uploaded_file is not None:
                 summary_gist += f"-- {row['gist']}\n"
 
             # Replace the following variables with appropriate values
-            sender_email = "ashiqa.shervegar2002@gmail.com"
-            sender_password = "qfnqueznsdmypacc"
+            sender_email = "ashiqashervegar.2703@gmail.com"
+            sender_password = "wcgfigqopnfchfmw"
             receiver_email = recipient_email
             subject = "Summary Generated"
             body = "Hello, Your summary is ready!!!!! \n\n" + summary_gist + "\n\nPlease find the attachment to go through the full summary"
