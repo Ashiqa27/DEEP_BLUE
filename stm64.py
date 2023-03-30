@@ -14,6 +14,7 @@ from email.mime.application import MIMEApplication
 from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from moviepy.video.io.VideoFileClip import VideoFileClip
 
 # Set the title of the app
 st.title("Video Meeting Summarizer")
@@ -26,12 +27,15 @@ def update_start(start_t):
     st.session_state['start_point'] = int(start_t / 1000)
 
 
-def get_video_duration(video_file):
-    """Gets the duration of a video file in seconds"""
-    video = mp.VideoFileClip(video_file.name)
-    duration = video.duration
-    video.close()
-    return duration
+def get_video_duration(uploaded_file):
+    try:
+        clip = VideoFileClip(uploaded_file.name)
+        duration = clip.duration
+        clip.close()
+        return duration
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 
 uploaded_file = st.file_uploader("choose file", type="mp4")
