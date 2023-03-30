@@ -15,7 +15,6 @@ from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from moviepy.video.io.VideoFileClip import VideoFileClip
-import cv2
 
 # Set the title of the app
 st.title("Video Meeting Summarizer")
