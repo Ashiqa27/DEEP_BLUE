@@ -15,6 +15,7 @@ from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from moviepy.video.io.VideoFileClip import VideoFileClip
+import cv2
 
 # Set the title of the app
 st.title("Video Meeting Summarizer")
@@ -26,22 +27,18 @@ if 'start_point' not in st.session_state:
 def update_start(start_t):
     st.session_state['start_point'] = int(start_t / 1000)
 
-
-def get_video_duration(uploaded_file):
-    try:
-        clip = VideoFileClip(uploaded_file.name)
-        duration = clip.duration
-        clip.close()
-        return duration
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
-
-
 uploaded_file = st.file_uploader("choose file", type="mp4")
 if uploaded_file is not None:
     # get video duration in seconds
-    video_duration = get_video_duration(uploaded_file)
+    duration = get_video_duration(uploaded_file)
+    if duration is not None:
+        duration_str = str(datetime.timedelta(seconds=duration))
+
+    # video_duration = get_video_duration(uploaded_file)
+    # if video_duration is not None:
+    #  duration_str = str(datetime.timedelta(seconds=video_duration))
+    #  hours, remainder = divmod(video_duration, 3600)
+    #  minutes, seconds = divmod(remainder, 60)
 
     # play video file
     st.video(uploaded_file, start_time=0)
@@ -73,9 +70,8 @@ if uploaded_file is not None:
             chapters_df = pd.DataFrame(chapters)
 
             # create text file with chapter summaries
-            duration_str = str(datetime.timedelta(seconds=video_duration))
+
             summary_text = f"\n\nDate:{datetime.datetime.now().strftime('%d-%m-%Y')}\n"
-            summary_text += f"Duration of the meeting: {duration_str}\n"
             summary_text += f"Number of attendees: {num_attendees}\n"
             summary_text += f"Names of the speaker: {speaker_names}\n\n"
             summary_text += f"Points discussed in the meet:\n\n"
