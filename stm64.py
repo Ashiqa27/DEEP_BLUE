@@ -28,16 +28,7 @@ def update_start(start_t):
 
 uploaded_file = st.file_uploader("choose file", type="mp4")
 if uploaded_file is not None:
-    # get video duration in seconds
-    duration = get_video_duration(uploaded_file)
-    if duration is not None:
-        duration_str = str(datetime.timedelta(seconds=duration))
 
-    # video_duration = get_video_duration(uploaded_file)
-    # if video_duration is not None:
-    #  duration_str = str(datetime.timedelta(seconds=video_duration))
-    #  hours, remainder = divmod(video_duration, 3600)
-    #  minutes, seconds = divmod(remainder, 60)
 
     # play video file
     st.video(uploaded_file, start_time=0)
